@@ -1,4 +1,6 @@
+import 'package:class_assignment_two/cubit/area_of_circle_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AreaOfCircleView extends StatefulWidget {
   const AreaOfCircleView({super.key});
@@ -9,7 +11,6 @@ class AreaOfCircleView extends StatefulWidget {
 
 class _AreaOfCircleViewState extends State<AreaOfCircleView> {
   final radiusController = TextEditingController(text: '');
-  double result = 0.0;
   final myKey = GlobalKey<FormState>();
 
   @override
@@ -34,15 +35,23 @@ class _AreaOfCircleViewState extends State<AreaOfCircleView> {
                 ),
               ),
               const SizedBox(height: 10),
-              Text(
-                'Result: $result',
-                style: const TextStyle(fontSize: 20),
+              BlocBuilder<AreaOfCircleCubit, double>(
+                builder: (context, result) {
+                  return Text(
+                    'Result: ${result.toString()}',
+                    style: const TextStyle(fontSize: 20),
+                  );
+                },
               ),
               const SizedBox(height: 10),
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    double radius =
+                        double.tryParse(radiusController.text) ?? 0.0;
+                    context.read<AreaOfCircleCubit>().calculate(radius);
+                  },
                   child: const Text('Calculate Area'),
                 ),
               ),
@@ -50,7 +59,10 @@ class _AreaOfCircleViewState extends State<AreaOfCircleView> {
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    context.read<AreaOfCircleCubit>().reset();
+                    radiusController.clear();
+                  },
                   child: const Text('Reset'),
                 ),
               ),
