@@ -23,57 +23,86 @@ class DashboardView extends StatelessWidget {
         ),
         centerTitle: true,
       ),
-      body: GridView(
-        padding: const EdgeInsets.all(8),
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          crossAxisSpacing: 8,
-          mainAxisSpacing: 12,
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            Card(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8)),
+              elevation: 3,
+              child: InkWell(
+                onTap: () => context
+                    .read<DashboardCubit>()
+                    .openAreaOfCircleView(context),
+                borderRadius: BorderRadius.circular(12),
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: const [
+                      Icon(Icons.circle_outlined, size: 40, color: Colors.blue),
+                      SizedBox(height: 8),
+                      Text('Area of Circle',
+                          style: TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.bold)),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            Card(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8)),
+              elevation: 3,
+              child: InkWell(
+                onTap: () => context
+                    .read<DashboardCubit>()
+                    .openSimpleInterestView(context),
+                borderRadius: BorderRadius.circular(8),
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: const [
+                      Icon(Icons.monetization_on_outlined,
+                          size: 40, color: Colors.green),
+                      SizedBox(height: 8),
+                      Text('Simple Interest',
+                          style: TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.bold)),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            Card(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8)),
+              elevation: 3,
+              child: InkWell(
+                onTap: () => context
+                    .read<DashboardCubit>()
+                    .openSpeedCalculatorView(context),
+                borderRadius: BorderRadius.circular(8),
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: const [
+                      Icon(Icons.speed, size: 40, color: Colors.red),
+                      SizedBox(height: 8),
+                      Text('Speed',
+                          style: TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.bold)),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ],
         ),
-        children: <Widget>[
-          Card(
-            child: InkWell(
-              onTap: () {
-                context.read<DashboardCubit>().openAreaOfCircleView(context);
-              },
-              child: const Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Icon(Icons.circle_outlined, size: 48),
-                  Text('Area of Circle'),
-                ],
-              ),
-            ),
-          ),
-          Card(
-            child: InkWell(
-              onTap: () {
-                context.read<DashboardCubit>().openSimpleInterestView(context);
-              },
-              child: const Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Icon(Icons.monetization_on_outlined, size: 48),
-                  Text('Simple Interest'),
-                ],
-              ),
-            ),
-          ),
-          Card(
-            child: InkWell(
-              onTap: () {
-                context.read<DashboardCubit>().openSpeedCalculatorView(context);
-              },
-              child: const Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Icon(Icons.speed, size: 48),
-                  Text('Speed'),
-                ],
-              ),
-            ),
-          ),
-        ],
       ),
     );
   }
