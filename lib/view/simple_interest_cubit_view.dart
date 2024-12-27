@@ -1,4 +1,6 @@
+import 'package:class_assignment_two/cubit/simple_interest_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SimpleInterestView extends StatefulWidget {
   const SimpleInterestView({super.key});
@@ -54,15 +56,27 @@ class _SimpleInterestViewState extends State<SimpleInterestView> {
                 ),
               ),
               const SizedBox(height: 10),
-              Text(
-                'Result: $result',
-                style: const TextStyle(fontSize: 20),
+              BlocBuilder<SimpleInterestCubit, double>(
+                builder: (context, result) {
+                  return Text(
+                    'Simple Interest: Rs. ${result.toString()}',
+                    style: const TextStyle(fontSize: 20),
+                  );
+                },
               ),
               const SizedBox(height: 10),
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    double principal =
+                        double.tryParse(principalController.text) ?? 0.0;
+                    double rate = double.tryParse(rateController.text) ?? 0.0;
+                    double time = double.tryParse(timeController.text) ?? 0.0;
+                    context
+                        .read<SimpleInterestCubit>()
+                        .calculate(principal, rate, time);
+                  },
                   child: const Text('Calculate Simple Interest'),
                 ),
               ),
@@ -70,7 +84,12 @@ class _SimpleInterestViewState extends State<SimpleInterestView> {
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    context.read<SimpleInterestCubit>().reset();
+                    principalController.clear();
+                    rateController.clear();
+                    timeController.clear();
+                  },
                   child: const Text('Reset'),
                 ),
               ),
