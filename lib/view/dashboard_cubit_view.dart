@@ -1,4 +1,6 @@
+import 'package:class_assignment_two/cubit/dashborad_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class DashboardView extends StatelessWidget {
   const DashboardView({super.key});
@@ -31,7 +33,9 @@ class DashboardView extends StatelessWidget {
         children: <Widget>[
           Card(
             child: InkWell(
-              onTap: () {},
+              onTap: () {
+                context.read<DashboardCubit>().openAreaOfCircleView(context);
+              },
               child: const Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
@@ -43,7 +47,9 @@ class DashboardView extends StatelessWidget {
           ),
           Card(
             child: InkWell(
-              onTap: () {},
+              onTap: () {
+                context.read<DashboardCubit>().openSimpleInterestView(context);
+              },
               child: const Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
@@ -55,7 +61,9 @@ class DashboardView extends StatelessWidget {
           ),
           Card(
             child: InkWell(
-              onTap: () {},
+              onTap: () {
+                context.read<DashboardCubit>().openSpeedCalculatorView(context);
+              },
               child: const Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
