@@ -1,3 +1,4 @@
+import 'package:class_assignment_two/view/dashboard_cubit_view.dart';
 import 'package:flutter/material.dart';
 
 class App extends StatelessWidget {
@@ -5,11 +6,9 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Kripesh"),
-      ),
-      body: Text("why"),
+    return const MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: DashboardView(),
     );
   }
 }
